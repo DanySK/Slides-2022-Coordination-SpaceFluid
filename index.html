@@ -3,15 +3,15 @@
   <head>
 	<meta name="generator" content="Hugo 0.100.0" />
     <meta charset="utf-8">
-<title>Guide for writing markdown slides</title>
-<meta name="description" content="A Hugo theme for creating Reveal.js presentations">
+<title>Space-fluid Adaptive Sampling: a Field-based, Self-organising Approach</title>
+<meta name="description" content="An adaptive way to sample signals that vary in space">
 <meta name="author" content="Danilo Pianini">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/reveal-js/css/reset.css">
 <link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/reveal-js/css/reveal.css">
-  <link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/css/custom-theme.min.6728277618991d48a9ca32f1e19db3b956568c0cc7a08accf7953d6ca5a804c8.css" id="theme"><link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/highlight-js/solarized-dark.min.css">
+  <link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/css/custom-theme.min.14838d984370553b20d6f2e1d834b34d219cea5d353515f8a48972a789eb7ddd.css" id="theme"><link rel="stylesheet" href="/Template-Hugo-Reveal-Slides/highlight-js/rainbow.min.css">
     
 <link rel="stylesheet" href="https://gitcdn.link/repo/DanySK/css-blur-animation/master/blur.css">
 <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
@@ -25,8 +25,425 @@
       <div class="slides">
   
 
-    <section><h1 id="short-guide-to-markdown-slides">Short guide to Markdown slides</h1>
+    
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="space-fluid-adaptive-sampling-a-field-based-self-organising-approach"><strong>Space-fluid Adaptive Sampling</strong>: a Field-based, Self-organising Approach</h1>
+<ul>
+<li>Roberto Casadei</li>
+<li>Stefano Mariani</li>
+<li><em>Danilo Pianini</em> $\Leftarrow$ it&rsquo;sa mee</li>
+<li>Mirko Viroli</li>
+<li>Franco Zambonelli</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="eu.png">
+  
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="pollution.png">
+  
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="pollution-monitoring-and-counter-action">Pollution monitoring and counter-action</h1>
+<ul>
+<li><strong>Context</strong> - Air pollution <em>sensors distributed</em> in a geographical area
+<ul>
+<li>Distribution is irregular and may change with time</li>
+<li>Of course sensors&rsquo; readings change with time, too</li>
+</ul>
+</li>
+<li><strong>Goal</strong> - apply <em>specific policies to areas</em> where pollution is too high
+<ul>
+<li>e.g., limit thermal cars traffic, limit non-electric heating, etc.</li>
+</ul>
+</li>
+<li><strong>Strategy</strong> - Find a way to <em>group sensor readings in space</em>
+<ul>
+<li>One area $\to$ one reading $\to$ one policy</li>
+</ul>
+</li>
+</ul>
 </section><section>
+<div style='position: relative; padding-bottom: 56.25%; padding-top: 35px; height: 0; overflow: hidden;'>
+    <iframe
+        sandbox='allow-scripts allow-same-origin'
+        allowfullscreen='true'
+        allowtransparency='true'
+        frameborder='0'
+        height='315'
+        src='https://www.mentimeter.com/embed/abf4634eb007cfcb84a6da7b863e11f0/b0570c4641e1'
+        style='position: absolute; top: 0; left: 0; width: 100%; height: 100%;'
+        width='420'
+        >
+    </iframe>
+</div>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="idea">Idea</h1>
+<p><em>Partition</em> the space based on <strong>both</strong></p>
+<ul>
+<li>geographical contiguity <strong>and</strong></li>
+<li><em>&ldquo;coherence&rdquo;</em> of sensors&rsquo; readings</li>
+</ul>
+<p>We want to obtain the <strong>largest</strong> possible regions
+(as <strong>few</strong> of them as possible)
+while <em>keeping the error under control</em></p>
+<p>$\to$ with <strong>no central coordinator</strong></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="pollution.png">
+  
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="pollution-partition.svg">
+  
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="pollution-partition-highlight.svg">
+  
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="aggregate-sampling">Aggregate sampling</h1>
+<ul>
+<li>A <strong>stabilising computation</strong>
+<ul>
+<li><em>eventually static input</em> $\to$ <em>eventually stable output</em></li>
+</ul>
+</li>
+<li>producing a <strong>regional partition field</strong>
+<ul>
+<li>A <em>stabilising field</em></li>
+<li><em>Contiguous in space</em></li>
+</ul>
+</li>
+<li>by accumulating an <strong>aggregate sampling error</strong>
+<ul>
+<li>Any monothonic function $f: \mathbb{R}\times\mathbb{R}^*\to\mathbb{R}_{&gt;0}$ measuring the error between the local data and its surroundings</li>
+<li>Accumulated through a monothonically increasing function</li>
+</ul>
+</li>
+<li>and keeping it under a <strong>threshold $\eta$</strong>.
+<ul>
+<li>The partition border is where the error threshold is reached</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h2 id="aggregate-computing-based-solution">Aggregate-computing-based solution</h2>
+<p><img src="network.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Every device <em>proposes itself as a valid candidate</em> with some strength</li>
+<li>The strength <em>may</em>  be the sensor reading, but any policy is fine</li>
+</ul>
+<p><img src="network-1-self-candidacy.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Candidacy get <em>exchanged</em>. Here, both distance and variance accumulate error</li>
+<li>If they are <em>within the allowed error</em> $\eta$, they compete and the strongest survives</li>
+</ul>
+<p><img src="network-2-compete.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Max distance: 2-hop: some areas <em>stop spreading</em></li>
+<li>&ldquo;Leader&rdquo; devices have dashed border, some lose their status in the process</li>
+</ul>
+<p><img src="network-3-progress.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Until the situation is <em>stabilised</em></li>
+</ul>
+<p><img src="network-4-progress.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>We can visualise the partitions</li>
+</ul>
+<p><img src="network-5-partition.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Also hiding the node location</li>
+</ul>
+<p><img src="network-6-partition.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>And consider an output value for the whole area (in this case, the average)</li>
+</ul>
+<p><img src="network-7-partition.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<ul>
+<li>Same as before, but colors are mapped to values</li>
+</ul>
+<p><img src="network-8-partition.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="actual-implementation">Actual Implementation</h1>
+<p>A <strong>reusable artifact</strong> has been produced for this work</p>
+<ul>
+<li><a href="https://github.com/DanySK/Experiment-2022-Coordination-Space-Fluid">https://github.com/DanySK/Experiment-2022-Coordination-Space-Fluid</a></li>
+<li>DOI: <a href="https://doi.org/10.5281/zenodo.6590180">10.5281/zenodo.6590180</a></li>
+</ul>
+<p>The implementation is in the process of being merged into the <a href="http://protelis.github.io/">Protelis</a>-lang library</p>
+<pre><code class="language-scala">def localLeaderElection(uid, strength, radius, metric, distance) {
+  share (lead, nbrLead &lt;- [uid, [strength, 0]]) {
+    alignedMap( // Expand a &quot;bubble&quot; with the local information
+      [nbrLead], // Remove &quot;bubbles&quot; that accumulated too much error 
+      { candidate, breaker -&gt; candidate==uid || foldMin(∞, breaker.get(1)+metric()) &lt; radius },
+      { candidate, breaker -&gt; // Let overlapping bubbles compete
+        let gradient = distance(source) // error accumulation
+        [gradcast(uid==candidate &amp;&amp; idOf(lead)==uid, strength, gradient, identity), gradient]
+      }, // default to the worst value if no valid bubble is present in the neighborhood
+      [-∞, ∞] // Then select the area the device belongs
+    ).fold(default) { a, b -&gt; if (tieBreakerOf(a) &gt; tieBreakerOf(b)) { a } else { b } }
+  }.get(0) // return the uid of the partition leader
+}
+</code></pre>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="evaluation">Evaluation</h1>
+<h3 id="desiderata">Desiderata</h3>
+<ul>
+<li><strong>stabilisation</strong>: if the input is stable, the output must be stable</li>
+<li><strong>high information (entropy)</strong>: <em>increase the number of regions</em> to minimise errors</li>
+<li><strong>error-controlled upscaling</strong>: create the <em>minimum number of regions</em> necessary to keep the error under threshold</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="metrics">Metrics</h1>
+<p>Assuming a set of devices $D$ partitioned into a set of regions
+$R = R_1 \cup \dots \cup R_{|R|}$
+where each $R_r$ is a set of devices
+${ D^{r}_1,\ \dots, D^{r}_{|R_r|} } $
+and each device $D^r_d$ reads the local value of the tracked signal $s^r_d$:</p>
+<ul>
+<li><strong>Region count</strong> $|R|$</li>
+<li><strong>Mean region size</strong> $\mu_{R}$</li>
+<li><strong>Standard deviation of the mean of the signal in regions</strong> $\sigma(\mu_s)$
+<ul>
+<li>Proxy for <em>inter-region diff.</em>; high $\to$ regions differ with each other $\to$ better</li>
+</ul>
+</li>
+<li><strong>Mean standard deviation of the signal in regions</strong>
+<ul>
+<li>Proxy for <em>intra-region error</em>, low $\to$ regions internally similar $\to$ better</li>
+</ul>
+</li>
+<li><strong>Std. dev. of the std. dev. of the signal in regions</strong> $\sigma(\sigma_s)$
+<ul>
+<li>Proxy for <em>partition consistency</em>; high $\to$ regions behave differently $\to$ better</li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="topologies">Topologies</h1>
+<h2 id="regular-grid">regular grid</h2>
+<img src="grid.png" style='
+    
+    
+    max-width: 95vw;
+    max-height: 40vh;
+    object-fit: contain;
+'>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="topologies-1">Topologies</h1>
+<h2 id="irregular-perturbed-grid">irregular (perturbed) grid</h2>
+<img src="pgrid.png" style='
+    
+    
+    max-width: 95vw;
+    max-height: 40vh;
+    object-fit: contain;
+'>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="topologies-2">Topologies</h1>
+<h2 id="uniform-random">uniform random</h2>
+<img src="uniform.png" style='
+    
+    
+    max-width: 95vw;
+    max-height: 40vh;
+    object-fit: contain;
+'>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="topologies-3">Topologies</h1>
+<h2 id="exponentially-distributed">exponentially distributed</h2>
+<img src="exp.png" style='
+    
+    
+    max-width: 95vw;
+    max-height: 40vh;
+    object-fit: contain;
+'>
+
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="spatial-signals">Spatial signals</h1>
+<ul>
+<li><strong>Constant</strong>: all sensors read the same value everywhere
+<ul>
+<li>Minimum number of <em>large regions</em></li>
+</ul>
+</li>
+<li><strong>Uniform</strong> (random): sensors read a random value, maximum entropy
+<ul>
+<li>Maximum information, <em>many small regions</em> wanted</li>
+</ul>
+</li>
+<li><strong>Bivariate Gaussian</strong>: the signal is highest at the center of the network and progressively lower towards the edges
+<ul>
+<li><em>Many small regions along the slope</em>, few large regions at the network edge</li>
+</ul>
+</li>
+<li><strong>Multiple Bivariate Gaussians</strong>: three bivariates located along the diagonal
+<ul>
+<li>Similar to the previous, but with different geometry (to intercept potential issues due to <em>symmetry</em>)</li>
+</ul>
+</li>
+<li><strong>Dynamic</strong>: the system cycles across the previous signals at pre-defined intervals
+<ul>
+<li>useful to study the dynamics and <em>self-stabilisation</em></li>
+</ul>
+</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h2 id="leader-strength">Leader strength</h2>
+<ul>
+<li><strong>local signal value</strong></li>
+<li><strong>neighbourhood-mean of the signal value</strong></li>
+<li><strong>neighbourhood-variance of the signal value</strong></li>
+</ul>
+<h2 id="error-accumulation-metric">Error accumulation metric</h2>
+<ul>
+<li><strong>distance</strong> (ignores the actual error)</li>
+<li><strong>difference between the signal readings</strong>
+<ul>
+<li>actually min($\epsilon$, $|s_a - s_b|$) where $\epsilon \in \mathbb{R_+}$, $\epsilon = 0$ iff $a=b$, $0 &lt; \epsilon \ll 1$ otherwise
+(to preserve the triangle inequality)</li>
+</ul>
+</li>
+<li><strong>mix</strong>: product of the previous two metrics</li>
+</ul>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="experiment-setup">Experiment setup</h1>
+<p><a href="https://alchemistsimulator.github.io/"><img src="https://raw.githubusercontent.com/AlchemistSimulator/Alchemist/master/site/static/images/logo.svg" style='
+    
+    
+    max-width: 4vw;
+    max-height: 80vh;
+    object-fit: contain;
+'>
+</a>
+<a href="https://alchemistsimulator.github.io/"><img src="https://raw.githubusercontent.com/AlchemistSimulator/Alchemist/master/site/static/images/logo-text-path.svg" style='
+    
+    
+    max-width: 30vw;
+    max-height: 80vh;
+    object-fit: contain;
+'>
+</a></p>
+<ul>
+<li><em>Cartesian product</em> of all topologies, signals, leader strenght functions, and error accumulation metrics</li>
+<li><em>100 repetitions</em> (with different seeds)</li>
+<li><em>630 charts</em> (available in the artifact repository)</li>
+<li>Data generation requires weeks on a normal PC
+<ul>
+<li>$\to$ Generated data is provided in the repository for further data analysis</li>
+</ul>
+</li>
+</ul>
+</section><section>
+<h1 id="main-results">Main results</h1>
 <h1 id="headers">Headers</h1>
 <h1 id="h1">H1</h1>
 <h2 id="h2">H2</h2>
@@ -304,7 +721,7 @@ joined</p>
   document.getElementsByTagName('head')[0].appendChild(link);
 </script>
 
-<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"900","highlight_theme":"solarized-dark","history":true,"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1440"}</script>
+<script type="application/json" id="reveal-hugo-site-params">{"custom_theme":"custom-theme.scss","custom_theme_compile":true,"custom_theme_options":{"enablesourcemap":true,"targetpath":"css/custom-theme.css"},"height":"900","highlight_theme":"rainbow","history":true,"slide_number":true,"theme":"league","transition":"slide","transition_speed":"fast","width":"1440"}</script>
 <script type="application/json" id="reveal-hugo-page-params">null</script>
 
 <script src="/Template-Hugo-Reveal-Slides/reveal-js/js/reveal.js"></script>
@@ -379,18 +796,17 @@ joined</p>
   </script>
 
     <script>
-    MathJax = {
-      tex: {
-        inlineMath: [['$', '$'], ['\\(', '\\)']]
-      },
-      svg: {
-        fontCache: 'global'
-      }
-    };
+  MathJax = {
+    tex: {
+      inlineMath: [['$', '$'], ['\\(', '\\)']]
+    },
+    svg: {
+      fontCache: 'global'
+    }
+  };
 </script>
-
 <script type="text/javascript" id="MathJax-script" async
-    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
+  src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js">
 </script>
 
     
