@@ -10,16 +10,16 @@
 // $mainColor: #000;
 // $headingColor: #111;
 
-$mainFontSize: 2em;
+$mainFontSize: 2.5em;
 $mainFont: 'Source Sans Pro', Helvetica, sans-serif;
 $headingFont: 'Source Sans Pro', Helvetica, sans-serif;
 $headingLetterSpacing: normal;
 $headingFontWeight: 600;
-$linkColor: #2690e7;
+$linkColor: #52d6d8;
 $linkColorHover: lighten( $linkColor, 25% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
 
-$heading1Size: 2.5em;
+$heading1Size: 2em;
 $heading2Size: 1.6em;
 $heading3Size: 1.3em;
 $heading4Size: 1.0em;
@@ -39,12 +39,12 @@ section.has-light-background {
 .reveal strong,
 .reveal b {
 	font-weight: bold;
-	color: #b81f0b
+	color: #e55a48
 }
 
 .reveal em {
 	font-style: italic;
-	color: #039418
+	color: #40cf56
 }
 
 .reveal section img {
@@ -60,7 +60,7 @@ section.has-light-background {
 }
 
 .reveal pre code {
-	color: black;
+	color: rgb(255, 255, 255);
 }
 
 .reveal h3 {

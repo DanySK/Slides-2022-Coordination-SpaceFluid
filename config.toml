@@ -20,8 +20,8 @@ unsafe = true
 # syntax highlighting for code inside of code fences
 [markup.highlight]
 codeFences = false  # use highlight.js 
-# codeFences = true  # use hugo highlighting at compile time
-style = "tango"  # set a style for hugo highlighting
+#codeFences = true  # use hugo highlighting at compile time
+#style = "base16"  # set a style for hugo highlighting
 
 [outputFormats.Reveal]
 baseName = "index"
@@ -31,7 +31,7 @@ isHTML = true
 [params.reveal_hugo]
 history = true
 theme = "league"
-highlight_theme = "solarized-dark"
+highlight_theme = "rainbow"
 slide_number = true
 transition = "slide"
 transition_speed = "fast"
