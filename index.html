@@ -239,7 +239,7 @@ while <em>keeping the error under control</em></p>
 <li>DOI: <a href="https://doi.org/10.5281/zenodo.6590180">10.5281/zenodo.6590180</a></li>
 </ul>
 <p>The implementation is in the process of being merged into the <a href="http://protelis.github.io/">Protelis</a>-lang library</p>
-<pre><code class="language-scala">def localLeaderElection(uid, strength, radius, metric, distance) {
+<pre><code class="language-scala">def aggregateSampling(uid, strength, radius, metric, distance) {
   share (lead, nbrLead &lt;- [uid, [strength, 0]]) {
     alignedMap( // Expand a &quot;bubble&quot; with the local information
       [nbrLead], // Remove &quot;bubbles&quot; that accumulated too much error 
@@ -362,12 +362,12 @@ and each device $D^r_d$ reads the local value of the tracked signal $s^r_d$:</p>
   
 <h1 id="spatial-signals">Spatial signals</h1>
 <ul>
-<li><strong>Constant</strong>: all sensors read the same value everywhere
+<li><strong>Constant</strong>: all sensors read the same value everywhere (<em>baseline</em>)
 <ul>
 <li>Minimum number of <em>large regions</em></li>
 </ul>
 </li>
-<li><strong>Uniform</strong> (random): sensors read a random value, maximum entropy
+<li><strong>Uniform</strong> (random): sensors read a random value, maximum entropy (<em>baseline</em>)
 <ul>
 <li>Maximum information, <em>many small regions</em> wanted</li>
 </ul>
@@ -442,264 +442,75 @@ and each device $D^r_d$ reads the local value of the tracked signal $s^r_d$:</p>
 </ul>
 </li>
 </ul>
-</section><section>
-<h1 id="main-results">Main results</h1>
-<h1 id="headers">Headers</h1>
-<h1 id="h1">H1</h1>
-<h2 id="h2">H2</h2>
-<h3 id="h3">H3</h3>
-<h4 id="h4">H4</h4>
-</section><section>
-<h1 id="text">Text</h1>
-<p>normal text</p>
-<p><code>inline code</code></p>
-<p><em>italic</em></p>
-<p><strong>bold</strong></p>
-<p><strong><em>emphasized</em></strong></p>
-<p><em><strong>emphasized alternative</strong></em></p>
-<p><del>strikethrough</del></p>
-<p><a href="http://www.google.com">link</a></p>
-</section><section>
-<h1 id="lists-and-enums">Lists and enums</h1>
-<ol>
-<li>First ordered list item</li>
-<li>Another item
-<ul>
-<li>Unordered sub-list.</li>
-<li>with two items
-<ul>
-<li>another sublist
-<ol>
-<li>With a sub-enum</li>
-<li>yay!</li>
-</ol>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>Actual numbers don&rsquo;t matter, just that it&rsquo;s a number</li>
-<li>Ordered sub-list</li>
-<li>And another item.</li>
-</ol>
-</section><section>
-<h1 id="inline-images">Inline images</h1>
-<p><img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" alt="Alternative text"></p>
-</section><section>
-<h2 id="fallback-to-shortcodes-for-resizing">Fallback to shortcodes for resizing</h2>
-<p>Autoresize specifying</p>
-<ul>
-<li><code>max-w</code> (percent of parent element width) and/or <code>max-h</code> (percent of viewport height) as max sizes , and</li>
-<li><code>width</code> and/or <code>height</code> as <em>exact</em> sizes (as percent of viewport size)</li>
-</ul>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    
-    
-    max-width: 95vw;
-    max-height: 20vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="low-res-plain-markdown">Low res, plain markdown</h2>
-<p><img src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" alt=""></p>
-</section><section>
-<h2 id="hi-res-plain-markdown">Hi res, plain markdown</h2>
-<p><img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" alt=""></p>
-</section><section>
-<h2 id="low-res-default">Low res, default</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" style='
-    
-    
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="hi-res-default">Hi res, default</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    
-    
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="low-res-enlarged-horizontally">Low res, enlarged horizontally</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" style='
-    width: 100vw;
-    
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="low-res-enlarged-vertically">Low res, enlarged vertically</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" style='
-    
-    height: 100vh;
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="hi-res-reduced-horizontally">Hi res, reduced horizontally</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    width: 50vw;
-    
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="hi-res-reduced-vertically">Hi res, reduced vertically</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    
-    height: 50vh;
-    max-width: 95vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="hi-res-reducing-maximum-expansion-horizontally">Hi res, reducing maximum expansion horizontally</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    
-    
-    max-width: 50vw;
-    max-height: 80vh;
-    object-fit: contain;
-'>
-
-</section><section>
-<h2 id="hi-res-reducing-maximum-expansion-vertically">Hi res, reducing maximum expansion vertically</h2>
-<img src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" style='
-    
-    
-    max-width: 95vw;
-    max-height: 50vh;
-    object-fit: contain;
-'>
-
 </section>
 
 <section data-noprocess data-shortcode-slide
-      data-background-image="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg">
+      data-background-image="background.png">
   
-<h1 id="large-images-as-background">Large images as background</h1>
-<h2 id="may-affect-printing">(May affect printing)</h2>
+<p>$\Rightarrow$ The behaviour looks <em>self-stabilising</em> (see the <em>dynamic</em>)</p>
+<p>$\Rightarrow$ <em>insensitive to device distribution</em>: <strong>spatial signals drive the process</strong></p>
+<p><img src="datasource_bubble-count_deployment_exp.svg" alt="">
+<img src="datasource_bubble-count_deployment_grid.svg" alt="">
+<img src="datasource_bubble-count_deployment_pgrid.svg" alt="">
+<img src="datasource_bubble-count_deployment_uniform.svg" alt=""></p>
 </section>
 
 <section data-noprocess data-shortcode-slide
-      data-background-image="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg"
-      data-state="blur-animation-light"
-      data-transition="fade-in fade-out">
+      data-background-image="background.png">
   
-<h1 id="also-available-with-blur-and-custom-transitions">Also available with blur and custom transitions</h1>
-<h2 id="may-affect-printing-1">(May affect printing)</h2>
-</section><section>
-<h1 id="latex">$$\LaTeX{}$$</h1>
-<p>Inline equations like $E=mc^2$</p>
-<p>$$\frac{n!}{k!(n-k)!} = \binom{n}{k}$$</p>
-</section><section>
-<h1 id="code-snippets">Code snippets</h1>
-<pre><code class="language-kotlin">val x = pippo
-</code></pre>
-<pre><code class="language-go">package main
- 
-import &quot;fmt&quot;
- 
-func main() {
-    fmt.Println(&quot;Hello world!&quot;)
-}
-</code></pre>
-</section><section>
-<h1 id="tables">Tables</h1>
-<p>Colons can be used to align columns.</p>
-<table>
-<thead>
-<tr>
-<th>Tables</th>
-<th style="text-align:center">Are</th>
-<th style="text-align:right">Cool</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>col 3 is</td>
-<td style="text-align:center">right-aligned</td>
-<td style="text-align:right">$1600</td>
-</tr>
-<tr>
-<td>col 2 is</td>
-<td style="text-align:center">centered</td>
-<td style="text-align:right">$12</td>
-</tr>
-<tr>
-<td>zebra stripes</td>
-<td style="text-align:center">are neat</td>
-<td style="text-align:right">$1</td>
-</tr>
-</tbody>
-</table>
-<p>There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don&rsquo;t need to make the
-raw Markdown line up prettily. You can also use inline Markdown.</p>
-</section><section>
-<h1 id="quotes">Quotes</h1>
-<blockquote>
-<p>Multiple
-lines
-of
-a
-single
-quote
-get
-joined</p>
-</blockquote>
-<blockquote>
-<p>Very long one liners of Markdown text automatically get broken into a multiline quotation, which is then rendered in the slides.</p>
-</blockquote>
-</section><section>
-<h1 id="fragments">Fragments</h1>
 <ul>
-<li><span class='fragment '
-  >
-  pluto
-</span></li>
-<li><span class='fragment '
-  >
-  pluto
-</span></li>
-<li><span class='fragment '
-  >
-  pluto
-</span></li>
+<li><em><strong>Inter</strong>-region</em> <strong>difference</strong> (left, the higher the more different)</li>
+<li><em><strong>Intra</strong>-region</em> <strong>consistency</strong> (right, the lower the more similar are the readings)</li>
 </ul>
-</section><section>
-<h1 id="graphs-via-gravizo">Graphs via Gravizo</h1>
+<p><img src="datasource_inter-mean-stdev_deployment_pgrid.svg" alt="">
+<img src="datasource_intra-stdev-mean_deployment_pgrid.svg" alt=""></p>
+<p>$\Rightarrow$ Regions tend to be <strong>very different with respect to each other</strong></p>
+<p>$\Rightarrow$ Regions remain <strong>internally consistent</strong> <br>
+(except for the random signal, too much entropy)</p>
+<p>$\Rightarrow$ <em>&ldquo;Graceful&rdquo; adaptation</em> dynamics</p>
+</section>
 
-
-
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
   
-    
+<p>$\Rightarrow$ The <strong>leader policy selection</strong> has <em>little impact</em></p>
+<p>$\Rightarrow$ Selecting more <em>&ldquo;central&rdquo; leaders</em> can help with <em>stabilisation performance</em></p>
+<p><img src="datasource_inter-mean-stdev_leader%20selection_mean.svg" alt="">
+<img src="datasource_inter-mean-stdev_leader%20selection_value.svg" alt="">
+<img src="datasource_inter-mean-stdev_leader%20selection_variance.svg" alt=""></p>
+</section>
+
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
   
+<p>$\Rightarrow$ The <strong>error metric and accumulation</strong> has <em>large impact</em></p>
+<p>$\Rightarrow$ Both <strong>inter</strong>-region (top) and <strong>intra</strong>-region (bottom)</p>
+<p><img src="datasource_inter-mean-stdev_metric_valuediff.svg" alt="">
+<img src="datasource_inter-mean-stdev_metric_distance.svg" alt=""><br>
+<img src="datasource_intra-stdev-mean_metric_valuediff.svg" alt="">
+<img src="datasource_intra-stdev-mean_metric_distance.svg" alt=""></p>
+</section>
 
-
-<figure>
-  <img
-    src='https://g.gravizo.com/svg?%0adigraph%20G%20%7b%0aaize%20%3d%224%2c4%22%3b%0amain%20%5bshape%3dbox%5d%3b%0amain%20-%3e%20parse%20%5bweight%3d8%5d%3b%0aparse%20-%3e%20execute%3b%0amain%20-%3e%20init%20%5bstyle%3ddotted%5d%3b%0amain%20-%3e%20cleanup%3b%0aexecute%20-%3e%20%7b%20make_string%3b%20printf%7d%0ainit%20-%3e%20make_string%3b%0aedge%20%5bcolor%3dred%5d%3b%0amain%20-%3e%20printf%20%5bstyle%3dbold%2clabel%3d%22100%20times%22%5d%3b%0amake_string%20%5blabel%3d%22make%20a%20string%22%5d%3b%0anode%20%5bshape%3dbox%2cstyle%3dfilled%2ccolor%3d%22.7%20.3%201.0%22%5d%3b%0aexecute%20-%3e%20compare%3b%0a%7d%0a'
-    alt='Example Gravizo graph'
-    width="100%"
-    />
-    <figcaption>Example Gravizo graph</figcaption>
-</figure>
-
+<section data-noprocess data-shortcode-slide
+      data-background-image="background.png">
+  
+<h1 id="conclusion">Conclusion</h1>
+<p>We presented a <em>distributed sampler sensitive to the <strong>spatial</strong> dynamics of the signal under observation</em></p>
+<ul>
+<li>Strives to find the <strong>balance</strong> between <em>minimising the sampling error</em> and <em>minimising the region count</em></li>
+<li>Realises <strong>effective sampling</strong>, find as few as possible <em>contiguous</em> regions
+<ul>
+<li>keeping intra-region error under a threshold</li>
+<li>not forcing any non-metric induced shape</li>
+</ul>
+</li>
+</ul>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>Investigate the relationship with <em>time-fluid</em> field-based coordination (Coord 2021)</li>
+<li><em>Prove self-stabilisation</em> (rewrite the algorithm in a self-stab fragment)</li>
+<li>Improve the dynamics and its measurements</li>
+</ul>
 </section>
 
   
