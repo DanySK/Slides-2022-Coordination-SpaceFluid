@@ -1,6 +1,6 @@
 baseURL = "https://danysk.github.io/Slides-2022-Coordination-SpaceFluid"
-languageCode = "en-us"
-title = "A Hugo theme for creating Reveal.js presentations"
+languageCode = "en-uk"
+title = "Space-fluid Adaptive Sampling: a Field-based, Self-organising Approach"
 disableKinds = ["sitemap", "RSS"]
 theme = "reveal-hugo"
 publishDir = "build"
