@@ -180,7 +180,7 @@ A **reusable artifact** has been produced for this work
 The implementation is in the process of being merged into the [Protelis](http://protelis.github.io/)-lang library
 
 ```scala
-def localLeaderElection(uid, strength, radius, metric, distance) {
+def aggregateSampling(uid, strength, radius, metric, distance) {
   share (lead, nbrLead <- [uid, [strength, 0]]) {
     alignedMap( // Expand a "bubble" with the local information
       [nbrLead], // Remove "bubbles" that accumulated too much error 
@@ -270,9 +270,9 @@ and each device $D^r_d$ reads the local value of the tracked signal $s^r_d$:
 
 # Spatial signals
 
-* **Constant**: all sensors read the same value everywhere
+* **Constant**: all sensors read the same value everywhere (*baseline*)
   * Minimum number of *large regions*
-* **Uniform** (random): sensors read a random value, maximum entropy
+* **Uniform** (random): sensors read a random value, maximum entropy (*baseline*)
   * Maximum information, *many small regions* wanted
 * **Bivariate Gaussian**: the signal is highest at the center of the network and progressively lower towards the edges
   * *Many small regions along the slope*, few large regions at the network edge
@@ -315,229 +315,74 @@ and each device $D^r_d$ reads the local value of the tracked signal $s^r_d$:
 
 ---
 
-# Main results
+{{< slide background-image="background.png" >}}
 
+$\Rightarrow$ The behaviour looks *self-stabilising* (see the *dynamic*)
 
+$\Rightarrow$ *insensitive to device distribution*: **spatial signals drive the process**
 
-# Headers
-
-# H1
-## H2
-### H3
-#### H4
-
----
-
-# Text
-
-normal text
-
-`inline code`
-
-*italic*
-
-**bold**
-
-**_emphasized_**
-
-*__emphasized alternative__*
-
-~~strikethrough~~
-
-[link](http://www.google.com)
+![](datasource_bubble-count_deployment_exp.svg)
+![](datasource_bubble-count_deployment_grid.svg)
+![](datasource_bubble-count_deployment_pgrid.svg)
+![](datasource_bubble-count_deployment_uniform.svg)
 
 ---
 
-# Lists and enums
+{{< slide background-image="background.png" >}}
 
-1. First ordered list item
-1. Another item
-    * Unordered sub-list.
-    * with two items
-        * another sublist
-            1. With a sub-enum
-            1. yay!
-1. Actual numbers don't matter, just that it's a number
-  1. Ordered sub-list
-1. And another item.
+* *__Inter__-region* **difference** (left, the higher the more different)
+* *__Intra__-region* **consistency** (right, the lower the more similar are the readings)
 
----
+![](datasource_inter-mean-stdev_deployment_pgrid.svg)
+![](datasource_intra-stdev-mean_deployment_pgrid.svg)
 
-# Inline images
+$\Rightarrow$ Regions tend to be **very different with respect to each other**
 
-![Alternative text](https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg)
+$\Rightarrow$ Regions remain **internally consistent** <br>
+(except for the random signal, too much entropy)
+
+$\Rightarrow$ *"Graceful" adaptation* dynamics
 
 ---
 
-## Fallback to shortcodes for resizing
+{{< slide background-image="background.png" >}}
 
-Autoresize specifying
+$\Rightarrow$ The **leader policy selection** has *little impact*
 
-* `max-w` (percent of parent element width) and/or `max-h` (percent of viewport height) as max sizes , and
-* `width` and/or `height` as *exact* sizes (as percent of viewport size)
+$\Rightarrow$ Selecting more *"central" leaders* can help with *stabilisation performance*
 
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" max-h="20">}}
-
----
-
-## Low res, plain markdown
-
-![](https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg)
+![](datasource_inter-mean-stdev_leader%20selection_mean.svg)
+![](datasource_inter-mean-stdev_leader%20selection_value.svg)
+![](datasource_inter-mean-stdev_leader%20selection_variance.svg)
 
 ---
 
-## Hi res, plain markdown
+{{< slide background-image="background.png" >}}
 
-![](https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg)
+$\Rightarrow$ The **error metric and accumulation** has *large impact*
 
----
+$\Rightarrow$ Both **inter**-region (top) and **intra**-region (bottom)
 
-## Low res, default
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" >}}
-
----
-
-## Hi res, default
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" >}}
+![](datasource_inter-mean-stdev_metric_valuediff.svg)
+![](datasource_inter-mean-stdev_metric_distance.svg)<br>
+![](datasource_intra-stdev-mean_metric_valuediff.svg)
+![](datasource_intra-stdev-mean_metric_distance.svg)
 
 ---
 
-## Low res, enlarged horizontally
+{{< slide background-image="background.png" >}}
 
-{{< image src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" width="100">}}
+# Conclusion
 
----
+We presented a *distributed sampler sensitive to the __spatial__ dynamics of the signal under observation*
 
-## Low res, enlarged vertically
+* Strives to find the **balance** between *minimising the sampling error* and *minimising the region count*
+* Realises **effective sampling**, find as few as possible *contiguous* regions
+  * keeping intra-region error under a threshold
+  * not forcing any non-metric induced shape
 
-{{< image src="https://upload.wikimedia.org/wikipedia/it/thumb/6/6c/Scavolino_innevata.jpg/260px-Scavolino_innevata.jpg" height="100">}}
+## TODO
 
----
-
-## Hi res, reduced horizontally
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" width="50">}}
-
----
-
-## Hi res, reduced vertically
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" height="50">}}
-
----
-
-## Hi res, reducing maximum expansion horizontally
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" max-w="50">}}
-
----
-
-## Hi res, reducing maximum expansion vertically
-
-{{< image src="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" max-h="50">}}
-
----
-
-{{< slide background-image="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" >}}
-
-# Large images as background
-## (May affect printing)
-
----
-
-{{< slide background-image="https://upload.wikimedia.org/wikipedia/it/6/6c/Scavolino_innevata.jpg" state="blur-animation-light"  transition="fade-in fade-out" >}}
-
-# Also available with blur and custom transitions
-## (May affect printing)
-
----
-
-# $$\LaTeX{}$$
-
-
-Inline equations like $E=mc^2$
-
-$$\frac{n!}{k!(n-k)!} = \binom{n}{k}$$  
-
----
-
-# Code snippets
-
-
-```kotlin
-val x = pippo
-```
-
-```go
-package main
- 
-import "fmt"
- 
-func main() {
-    fmt.Println("Hello world!")
-}
-```
-
----
-
-# Tables
-
-Colons can be used to align columns.
-
-| Tables        | Are           | Cool  |
-| ------------- |:-------------:| -----:|
-| col 3 is      | right-aligned | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
-
-There must be at least 3 dashes separating each header cell.
-The outer pipes (|) are optional, and you don't need to make the 
-raw Markdown line up prettily. You can also use inline Markdown.
-
----
-
-# Quotes
-
-> Multiple
-> lines
-> of
-> a
-> single
-> quote
-> get
-> joined
-
-> Very long one liners of Markdown text automatically get broken into a multiline quotation, which is then rendered in the slides.
-
----
-
-# Fragments
-
-* {{< frag c="pluto" >}}
-* {{< frag c="pluto" >}}
-* {{< frag c="pluto" >}}
-
----
-
-# Graphs via Gravizo
-
-{{< gravizo "Example Gravizo graph" >}}
-  digraph G {
-    aize ="4,4";
-    main [shape=box];
-    main -> parse [weight=8];
-    parse -> execute;
-    main -> init [style=dotted];
-    main -> cleanup;
-    execute -> { make_string; printf}
-    init -> make_string;
-    edge [color=red];
-    main -> printf [style=bold,label="100 times"];
-    make_string [label="make a string"];
-    node [shape=box,style=filled,color=".7 .3 1.0"];
-    execute -> compare;
-  }
-{{< /gravizo >}}
-
+* Investigate the relationship with *time-fluid* field-based coordination (Coord 2021)
+* *Prove self-stabilisation* (rewrite the algorithm in a self-stab fragment)
+* Improve the dynamics and its measurements
